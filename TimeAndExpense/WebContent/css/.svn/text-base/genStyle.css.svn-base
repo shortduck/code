@@ -1,0 +1,133 @@
+@CHARSET "ISO-8859-1";
+
+.fontClass {
+	font-family: Arial, sans-serif, Helvetica;
+	font-size: 9pt;
+}
+
+.theaderStyle {
+	background: buttonface;
+	color: #000000;
+	text-decoration: none;
+	font-family: Arial;
+	font-size: 10pt;
+	border-top: medium outset;
+	border-right: thin outset;
+	border-bottom: medium outset;
+}
+
+.evenRowColor {
+	background-color: grey;
+	font-color: white;
+}
+
+.oddRowColor {
+	background-color: white;
+}
+
+.cursor {
+	cursor: hand
+}
+
+.clButton {
+	position: absolute;
+	width: 76px;
+	height: 23px;
+	font-family: Sans Serif;
+	font-size: 9pt;
+	cursor: hand;
+	border-top: 3px ridge #F5F5F5;
+	border-left: 3px ridge #F5F5F5;
+	border-right: 3px ridge white;
+	border-bottom: 3px ridge white;
+	background-color: #C0C0C0;
+}
+
+.clBut {
+	position: absolute;
+	width: 66px;
+	height: 23px;
+	font-family: MS Sans Serif;
+	font-size: 8pt;
+	cursor: hand;
+	border-top: 3px ridge #F5F5F5;
+	border-left: 3px ridge #F5F5F5;
+	border-right: 3px ridge white;
+	border-bottom: 3px ridge white;
+	background-color: #C0C0C0;
+}
+
+.clCaption {
+	font-family: arial;
+	font-style: normal;
+	font-size: 9pt;
+	cursor: default;
+	border-width: thin ridge;
+	height: 22;
+	border-style: 2px solid blue;
+}
+
+.clImg {
+	vertical-align: middle;
+	cursor: hand;
+}
+
+.rtop,.rbottom {
+	display: block
+}
+
+.rtop *,.rbottom * {
+	display: block;
+	height: 1px;
+	overflow: hidden
+}
+
+.r1 {
+	margin: 0 5px
+}
+
+.r2 {
+	margin: 0 3px
+}
+
+.r3 {
+	margin: 0 2px
+}
+
+.r4 {
+	margin: 0 1px;
+	height: 2px
+}
+
+.clTheadCaption {
+	font-family: arial, helvetica, sans-serif;
+	font-style: normal;
+	font-size: 9pt;
+	cursor: default;
+	font-weight: bold;
+	align: center;
+}
+
+.clText {
+	height: 18;
+	width: 50;
+	font-family: Arial, sans-serif, Helvetica;
+}
+
+a {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #336699;
+	text-decoration: none;
+}
+
+a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #336699;
+	text-decoration: none;
+	font-weight: bold
+}
+
+.clFieldSet {
+	color: black;;
+	border: 1px solid #000;
+}

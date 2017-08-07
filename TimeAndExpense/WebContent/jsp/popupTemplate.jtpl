@@ -1,0 +1,26 @@
+<!--
+
+Template meant to used for popups in the application. This template will only include 
+page specific styles and a content area.  
+
+
+ -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><%@page
+	language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link href="${pageContext.request.contextPath}/css/page.css"
+	rel="stylesheet" type="text/css" />
+
+<%-- tpl:insert attribute="headarea" --%><title>popupTemplate</title><%-- /tpl:insert --%>
+</head>
+
+<body>
+<%-- tpl:insert attribute="bodyarea" --%><%-- /tpl:insert --%>
+</body>
+
+</html>

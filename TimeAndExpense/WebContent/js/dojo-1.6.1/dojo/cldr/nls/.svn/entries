@@ -1,0 +1,337 @@
+10
+
+dir
+1809
+svn://hct071devwdw901:5631/HRSrepository/MiTES/Working/TimeAndExpense/WebContent/js/dojo-1.6.1/dojo/cldr/nls
+svn://hct071devwdw901:5631/HRSrepository
+
+
+
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9b2b8a61-b8e1-9f46-8af7-83e58fba066d
+
+da
+dir
+
+hebrew.js
+file
+
+
+
+
+2017-04-13T16:06:38.486882Z
+5de6a7e19deaf8e6a61e3ff23c787d80
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3418
+
+de
+dir
+
+sv
+dir
+
+gregorian.js
+file
+
+
+
+
+2017-04-13T16:06:38.489882Z
+9c0a0eee9f4ddacbd8dd2091e4ec34ac
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3237
+
+ja
+dir
+
+he
+dir
+
+islamic.js
+file
+
+
+
+
+2017-04-13T16:06:38.491882Z
+b24ef11758f975eea5a4780c4d98c109
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3148
+
+fi
+dir
+
+nb
+dir
+
+fr
+dir
+
+nl
+dir
+
+pl
+dir
+
+th
+dir
+
+hu
+dir
+
+ro
+dir
+
+zh
+dir
+
+zh-hk
+dir
+
+buddhist.js
+file
+
+
+
+
+2017-04-13T16:06:38.498882Z
+5b4990c739a28dbda494994366132f16
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2874
+
+en-ca
+dir
+
+ca
+dir
+
+pt
+dir
+
+tr
+dir
+
+ru
+dir
+
+en-gb
+dir
+
+fr-ch
+dir
+
+el
+dir
+
+en
+dir
+
+ar
+dir
+
+number.js
+file
+
+
+
+
+2017-04-13T16:06:38.518882Z
+0cc688cc1fd9751f9be4a5d45f671be2
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+678
+
+pt-pt
+dir
+
+en-au
+dir
+
+cs
+dir
+
+currency.js
+file
+
+
+
+
+2017-04-13T16:06:38.520882Z
+d7f78eb2dd5764064cc1888b75f42543
+2012-04-18T17:22:03.509132Z
+70
+hussainz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+156
+
+es
+dir
+
+zh-hant
+dir
+
+ko
+dir
+
+zh-tw
+dir
+
+it
+dir
+
+sk
+dir
+
+sl
+dir
+

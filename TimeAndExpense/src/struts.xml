@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.action.extension" value="action" />
+
+	<package name="timeexpense" namespace="" extends="struts-default">
+		<result-types>
+			<result-type name="JsonResult"	class="gov.michigan.dit.timeexpense.action.result.AjaxValidationAndResponseResult" />
+			<result-type name="redirect" class="org.apache.struts2.dispatcher.ServletRedirectResult"/>			
+		</result-types>
+
+		<interceptors>
+			<interceptor name="trxnInterceptor" class="gov.michigan.dit.timeexpense.interceptor.TransactionInterceptor" />
+			<interceptor name="viewSetupInterceptor" class="gov.michigan.dit.timeexpense.interceptor.ViewSetupInterceptor" />
+			<interceptor-stack name="timeAndExpenseStack">
+				<interceptor-ref name="trxnInterceptor" />
+				<interceptor-ref name="viewSetupInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="timeAndExpenseStack" />
+ 
+		<global-results>
+           <result name="g_exception">/jsp/errorPage.jsp</result>
+           <result name="securityFailure">/jsp/securityFailure.jsp</result>
+      	</global-results>
+
+   
+<!--   Agency Options [start] -->
+<action name="agyLocationInitialize" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="agyLocationInitialize">
+			<result name="input">/jsp/agency/agencylocation.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/agency/agencylocation.jsp</result>
+			 <result name="*" type="JsonResult" />
+			  
+</action>
+ 
+ <action name="saveNewMileage" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="saveNewMileage">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+ 
+  <action name="saveStateNewMileage" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="saveStateNewMileage">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+ <action name="getStateMilesUpdate" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="getStateMilesUpdate">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+
+     <action name="searchAgyDeptList" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="searchAgyDeptList">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+
+        <action name="deleteAgyDeptLocation" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="deleteAgyDeptLocation">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+         <action name="updateAgencyCity" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="updateAgencyCity">
+				 <result name="*" type="JsonResult" /> 
+       </action>
+       
+
+		<action name="agySelectAgencyLocation" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="agySelectAgencyLocation">
+			<result name="success">/jsp/agency/agencyTabPage.jsp</result>
+			<result name="input">/jsp/agency/agencyTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="agyMilesUpdate" class="gov.michigan.dit.timeexpense.action.AgyOptLocalAction" method="agyMilesUpdate">
+				 <result name="*" type="JsonResult" /> 
+				 </action>
+
+<!--   Agency Options [end] -->
+<!--   SYSTEM CODES ACTION [start] -->
+    	<action name="systemCodesInitialize" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="systemCodesInitialize">
+			<result name="input">/jsp/searchSystemCodes.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/searchSystemCodes.jsp</result>
+			 <result name="*" type="JsonResult" /> 
+		</action>
+		<action name="AjaxfindSearchResults" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="findSearchResults"> 
+			  <result name="*" type="JsonResult" /> 
+			  
+		</action>
+		
+		<action name="systemCodeEditAction" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="systemCodeEditAction">
+			<result name="success">/jsp/editSystemCode.jsp</result>
+			<result name="input">/jsp/editSystemCode.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+			<action name="SaveSystemCode" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="modifyExistingCode">
+			<result name="*" type="JsonResult" />
+		   </action>
+		   
+		   <action name="UpdateNewSystemCode" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="modifyNewCode">
+			<result name="*" type="JsonResult" />
+		   </action>
+		  		
+		  		<action name="SaveNewSystemCode" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="createNewSystemCode">
+			<result name="*" type="JsonResult" />
+		   </action>
+		  		
+		  		
+			<action name="DeleteSystemCode" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="deleteExistingCode">
+			<result name="*" type="JsonResult" />
+		</action>
+		 
+		<action name="NewSystemCode" class="gov.michigan.dit.timeexpense.action.SystemCodesAction" method="createSysCodeAction">
+			<result name="success">/jsp/createSystemCode.jsp</result>
+			<result name="input">/jsp/createSystemCode.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+<!--   SYSTEM CODES ACTION [end] -->
+
+		<!-- SELECT EMPLOYEE ACTIONS [start]  -->
+		<action name="SelectEmployee" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/selectEmployee.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/selectEmployee.jsp</result>
+		</action>
+
+		<action name="FindAppointments" class="gov.michigan.dit.timeexpense.action.AppointmentSearchAction">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<action name="MyEmployeesAction" class="gov.michigan.dit.timeexpense.action.MyEmployeesAction">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<action name="SelectEmployeeReferrer" class="gov.michigan.dit.timeexpense.action.SelectEmployeeReferrerAction">
+			<result name="success_expense" type="redirectAction">ViewExpenseList	</result>
+			<result name="success_advance" type="redirectAction">AdvanceListAction	</result>
+			<result name="success_travel_requisition" type="redirectAction">TravelRequisitionListAction	</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="FindAgencies" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction" method="updateAgencies">
+			<result name="*" type="JsonResult" />
+		</action>
+		<action name="FindTkus" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction" method="updateTkus">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<!-- SELECT EMPLOYEE ACTIONS [end]  -->
+
+
+		<!-- EMPLOYEE INFO ACTIONS [START]  -->
+		<action name="EmpInfoAction" class="gov.michigan.dit.timeexpense.action.EmpInfoAction">
+			<result name="success">/jsp/employeeInfo.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>			
+		</action>
+
+	<!-- EMPLOYEE INFO ACTIONS [START]  -->
+
+		<!-- LOGIN ACTION [start]  -->
+		<action name="Login" class="gov.michigan.dit.timeexpense.action.LoginAction"> 
+			<result name="success" type="redirectAction">HomePageAction</result>
+			<result name="nouser">/jsp/logout.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			
+		</action>
+		<!-- LOGIN ACTION [end]  -->
+
+		<!-- TRIP ID ACTIONS [start] -->
+		<action name="ExpenseAction" class="gov.michigan.dit.timeexpense.action.ExpenseSessionScopeResetAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TripIdAction</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+	 	<action name="TripIdAction" class="gov.michigan.dit.timeexpense.action.TripIdAction">
+			<result name="success">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="input">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="SaveExpense" class="gov.michigan.dit.timeexpense.action.SaveExpenseAction">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<action name="ModifyExpense" class="gov.michigan.dit.timeexpense.action.ModifyExpenseAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="ClearLastAction" class="gov.michigan.dit.timeexpense.action.ClearLastActionFromSessionAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="NextExpenseRevision" class="gov.michigan.dit.timeexpense.action.TripIdAction" method="getNextRevision">
+			<result name="success" type="redirectAction">
+				<param name="actionName">ExpenseAction</param>
+				<param name="namespace">/</param>
+				<param name="expenseMasterId">${expenseMasterId}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">ExpenseAction</param>
+				<param name="namespace">/</param>
+				<param name="expenseMasterId">${expenseMasterId}</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="PreviousExpenseRevision" class="gov.michigan.dit.timeexpense.action.TripIdAction" method="getPreviousRevision">
+			<result name="success" type="redirectAction">
+				<param name="actionName">ExpenseAction</param>
+				<param name="namespace">/</param>
+				<param name="expenseMasterId">${expenseMasterId}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">ExpenseAction</param>
+				<param name="namespace">/</param>
+				<param name="expenseMasterId">${expenseMasterId}</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<!-- TRIP ID ACTIONS [end] -->
+
+		<!-- Expense actions [start]-->
+		<action name="FindCurrentExpenseAmount" class="gov.michigan.dit.timeexpense.action.ExpenseAction" method="calculateExpenseAmount">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="CloneExpense" class="gov.michigan.dit.timeexpense.action.ExpenseAction" method="cloneExpense">
+			<result name="*" type="JsonResult" />
+		</action>
+		<!-- Expense actions [end]-->
+
+		<!-- Multiple appt popup [start] -->
+		<action name="EmployeeAppointmentSelection" class="gov.michigan.dit.timeexpense.action.EmployeeAppointmentSelectionAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		 <!-- Multiple appt popup [end] -->
+
+		<!-- Expense details [start] -->
+		<action name="FindExpenseDetails" class="gov.michigan.dit.timeexpense.action.ExpenseDetailsAction">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<action name="SaveExpenseDetails" class="gov.michigan.dit.timeexpense.action.SaveExpenseDetailsAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<!-- 
+		<action name="FindExpenseTypes" class="gov.michigan.dit.timeexpense.action.ExpenseDetailsAction" method="getExpenseTypesJson">
+			<result name="*" type="JsonResult" />
+		</action>
+		-->
+		
+		<action name="FindCommonMileage" class="gov.michigan.dit.timeexpense.action.CommonMileageAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="MarkExpenseAudited" class="gov.michigan.dit.timeexpense.action.AuditExpenseAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="FindExpenseTypeStandardRate" class="gov.michigan.dit.timeexpense.action.ExpenseTypeStandardRateAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		<!-- Expense details [end] -->
+
+		<!-- Expense liquidation [end] -->
+		<action name="ViewExpenseLiquidations" class="gov.michigan.dit.timeexpense.action.ViewExpenseLiquidationsAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		<action name="SaveExpenseLiquidations" class="gov.michigan.dit.timeexpense.action.SaveExpenseLiquidationsAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		<!-- Expense liquidation [end] -->
+
+		<action name="CodingBlockGrantPhase" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getGrantPhase">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="CodingBlockProjectPhase" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getProjectPhase">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="CodingBlockSubmit" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="applyCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="CodingBlockSave" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="saveCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="CodingBlockApprYear"	class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction"	method="getNewStoreForApprYear">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="HomePageAction" class="gov.michigan.dit.timeexpense.action.HomePageAction">
+			<result name="success">/jsp/homePage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+				<action name="AdvanceAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="viewAdvance">
+			<result name="success">/jsp/advanceTabPage.jsp</result>
+			<result name="input">/jsp/advanceTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+
+		<action name="SaveAdvanceAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="saveAdvance">
+			<result name="success">/jsp/advanceTabPage.jsp</result>
+			<result name="input">/jsp/advanceTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="AdvanceHistoryAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="getAdvanceHistory">
+			<result name="success">/jsp/advanceHistory.jsp</result>
+			<result name="input">/jsp/advanceHistory.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="AdvanceCreateAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="createAdvance">
+			<result name="success">/jsp/advanceTabPage.jsp</result>
+			<result name="input">/jsp/advanceTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="AdvanceSubmitAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="submitAdvance">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+
+		<action name="AdvanceApproveAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="approveAdvance">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="AdvanceRejectAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="rejectAdvance">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="getPreviousRevisionAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="getPreviousRevision">
+			<result name="success">/jsp/advanceTabPage.jsp</result>
+			<result name="input">/jsp/advanceTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="getNextRevisionAction" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="getNextRevision">
+			<result name="success">/jsp/advanceTabPage.jsp</result>
+			<result name="input">/jsp/advanceTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="AdvanceListAction" class="gov.michigan.dit.timeexpense.action.AdvanceListAction" method="viewAdvanceList">
+			<result name="success">/jsp/advanceListPage.jsp</result>
+			<result name="input">/jsp/advanceListPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+ 
+		<action name="AjaxAdvanceListAction" class="gov.michigan.dit.timeexpense.action.AdvanceListAction" method="getAdvanceList">
+				<result name="*" type="JsonResult"/>
+		</action>
+
+		<action name="AdvanceDeleteAction" class="gov.michigan.dit.timeexpense.action.AdvanceListAction" method="deleteAdvance">
+			<result name="success" type="redirectAction">AdvanceListAction </result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="AdvanceCodingBlockApprYear"	class="gov.michigan.dit.timeexpense.action.AdvanceAction"	method="getNewStoreForApprYear">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="AjaxNewsBulletinListAction" class="gov.michigan.dit.timeexpense.action.HomePageAction" method="getNewsBulletinItems">
+			<result name="*" type="JsonResult" />
+		</action>
+
+		<action name="AjaxAdvanceCodingBlockSubmit" class="gov.michigan.dit.timeexpense.action.AdvanceAction" method="save">
+			<result name="*" type="JsonResult"/>
+        </action>
+
+		<action name="ExpenseListAction" class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="viewExpenseList">
+			<result name="success">/jsp/expense/ExpenseListPage.jsp	</result>
+			<result name="input">/jsp/expense/ExpenseListPage.jsp</result>
+			<!-- <result name="failure">/error.htm</result>  -->
+		</action>
+
+		<action name="ViewExpenseList" class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="viewExpenseList">
+			<result name="success">/jsp/expense/ExpenseListPage.jsp</result>
+			<result name="input">/jsp/expense/ExpenseListPage.jsp</result>
+			<!-- <result name="failure">/jsp/expense/ExpenseListPage.jsp</result> -->
+		</action>
+
+		<action name="ExpenseDeleteAction"	class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="deleteExpense">
+			<result name="success" type="redirectAction">ViewExpenseList</result>
+			<result name="input">/jsp/expense/ExpenseListPage.jsp</result>
+			<result name="failure">/jsp/expense/ExpenseListPage.jsp</result>
+		</action>
+
+		<action name="ExpenseListAction" class="gov.michigan.dit.timeexpense.action.ExpenseListAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="setUserSubjectInSession" class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="setUserSubjectInSession">
+			<result name="success" type="redirectAction">ExpenseAction</result>
+			<result name="failure" >/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="ExpenseListTypeAction" class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="getFilteredExpenseList">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="AjaxExpenseListAction" class="gov.michigan.dit.timeexpense.action.ExpenseListAction" method="getExpenseList">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="ExpenseHistoryList" class="gov.michigan.dit.timeexpense.action.ExpenseHistoryAction" method="getExpenseHistoryList">
+			<result name="success">/jsp/expense/ExpenseHistoryPage.jsp</result>
+			<result name="input">/jsp/expense/ExpenseHistoryPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+
+		<action name="ExpenseCodingBlockAction" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="AjaxGetExpenseDetailsList" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getExpenseDetailsList">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="AjaxGetExpenseDetails" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getExpenseDetailCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="AjaxDeleteCodingBlock" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="deleteCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="getNextRevisionCodingBlock" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getNextRevisionCodingBlock">
+			<result name="success">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="input">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+				
+		<action name="getPrevRevisionCodingBlock" class="gov.michigan.dit.timeexpense.action.ExpenseCodingBlockAction" method="getPrevRevisionCodingBlock">
+			<result name="success">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="input">/jsp/expense/ExpenseTabPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		  <!-- ROUTINE TRAVELER ACTIONS [begin]  -->
+		   <action name="RoutineTraveler" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/routineTraveler.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/routineTraveler.jsp</result>
+		</action>
+		
+		 <action name="RoutineTravelerReport" class="gov.michigan.dit.timeexpense.action.RoutineTravelerReport">
+			<result name="input">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/report/RoutineTravelerReport-viewer.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+        
+        
+        <!-- ROUTINE TRAVELER ACTIONS [end]  -->
+        
+          <!-- NON ROUTINE TRAVELER ACTIONS [begin]  -->
+		   <action name="NonRoutineTraveler" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/nonRoutineTraveler.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/nonRoutineTraveler.jsp</result>
+		</action>
+		<action name="NonRoutineTravelerReport" class="gov.michigan.dit.timeexpense.action.NonRoutineTravelerReport">
+			<result name="input">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/report/NonRoutineTravelerReport-viewer.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+         <!-- NON ROUTINE TRAVELER ACTIONS [end]  -->
+		<!-- TRANSACTION LEDGER REPORTS ACTIONS [begin]  -->
+
+		<action name="TransactionLedgerReport" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/transactionLedger.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/transactionLedger.jsp</result>
+		</action>
+
+		<action name="TransactionLedgerViewer" class="gov.michigan.dit.timeexpense.action.TransactionLedgerReport">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<!-- TRANSACTION LEDGER REPORTS ACTIONS [end] -->
+		
+		<action name="SaveFilter" class="gov.michigan.dit.timeexpense.action.SaveFilterAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+        <!-- STATEWIDE APPROVAL ACTIONS [begin]  -->
+
+        <action name="StateWideApproval" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/statewideApprove.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/statewideApprove.jsp</result>
+		</action>
+		
+		<action name="FindApprovalList" class="gov.michigan.dit.timeexpense.action.StateWideApproveAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="ApproveReferrer" class="gov.michigan.dit.timeexpense.action.ApproveReferrerAction">
+			<result name="success_expense" type="redirectAction">
+				<param name="actionName">ExpenseAction</param>
+				<param name="namespace">/jsp</param>
+				<param name="expenseMasterId">${masterId}</param>
+			</result>
+			<result name="success_advance" type="redirectAction">
+				<param name="actionName">AdvanceAction</param>
+				<param name="namespace">/jsp</param>
+				<param name="advanceMasterId">${masterId}</param>
+			</result>
+			<result name="success_travel_requisition" type="redirectAction">
+				<param name="actionName">TravelReqAction</param>
+				<param name="namespace">/</param>
+				<param name="treqMasterId">${masterId}</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+        <!-- STATEWIDE APPROVAL ACTIONS  [end]  -->
+        
+         <!-- MANAGER APPROVAL ACTIONS [begin]  -->
+
+        <action name="ManagerApprove" class="gov.michigan.dit.timeexpense.action.ManagerApproveAction">
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/managerApprove.jsp</result>
+		</action>
+				
+		<action name="FindApprovalMgrList" class="gov.michigan.dit.timeexpense.action.ManagerApproveAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		
+        <!-- MANAGER APPROVAL ACTIONS  [end]  -->
+        
+		
+		 <!-- RECEIPTS REQUIRED REPORT ACTIONS [begin]  -->
+
+        <action name="ReceiptsRequiredReport" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/receiptsRequired.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/receiptsRequired.jsp</result>
+		</action>
+		
+		 <action name="ReceiptsRequiredReportAction" class="gov.michigan.dit.timeexpense.action.ReceiptsRequiredReportAction"  method="getPOJORepReceiptReq">
+		 	<result name="input">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/report/ReceiptsRequired-viewer.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+        
+        <!-- RECEIPTS REQUIRED REPORT ACTIONS [end]  -->
+        
+         <!-- EXCEPTION REPORT ACTIONS [begin]  -->
+
+        <action name="ExceptionReport" class="gov.michigan.dit.timeexpense.action.SelectEmployeeAction">
+			<result name="input">/jsp/exceptionReport.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/exceptionReport.jsp</result>
+		</action>
+		
+		 <action name="ExceptionReportAction" class="gov.michigan.dit.timeexpense.action.ExceptionReportAction">
+			<result name="input">/jsp/errorPage.jsp</result>
+			<result name="success">/jsp/report/ExceptionReport-viewer.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+        
+           <!--EXCEPTION REPORT ACTIONS [end]  -->
+
+		<!-- EXPENSE SUMMARY ACTIONS [Begin] -->
+		<action name="ExpenseSummaryAction" class="gov.michigan.dit.timeexpense.action.ExpenseSummaryAction">
+			<result name="success">/jsp/expense/ExpenseSummary.jsp</result> 
+			<result name="failure">/jsp/expense/ExpenseSummary.jsp</result>
+		</action>
+
+		<action name="AjaxSubmitExpense" class="gov.michigan.dit.timeexpense.action.ExpenseSummaryAction" method="submitExpense">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="CertifyExpense" class="gov.michigan.dit.timeexpense.action.ExpenseSummaryAction" method="certifyExpense">
+			<result name="*" type="JsonResult" />
+		</action>
+
+
+		<!-- 
+		<action name="openPrintSummaryReport" class="gov.michigan.dit.timeexpense.action.PrintSummaryAction">
+			<result name="success">/jsp/report/ExpenseSummaryReport-viewer.jsp</result> 
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		-->
+		<action name="openPrintSummaryReport" class="gov.michigan.dit.timeexpense.action.PrintSummaryAction">
+			<result name="success">/jsp/report/ExpSummaryReport-viewer.jsp</result> 
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		 
+		<!--  
+		<action name="openPrintDetailReport" class="gov.michigan.dit.timeexpense.action.PrintDetailAction">
+		<result name="success">/jsp/report/ExpenseDetailReport-viewer.jsp</result> 
+		<result name="failure">/jsp/errorPage.jsp</result>
+		</action>		
+		 -->
+		<action name="openPrintDetailReport" class="gov.michigan.dit.timeexpense.action.PrintDetailAction">
+			<result name="success">/jsp/report/ExpDetailReport-viewer.jsp</result> 
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>		
+		 
+		 
+		<action name="AjaxApproveExpense" class="gov.michigan.dit.timeexpense.action.ExpenseSummaryAction" method="approveExpense">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="AjaxRejectExpense" class="gov.michigan.dit.timeexpense.action.ExpenseSummaryAction" method="rejectExpense">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		<!-- EXPENSE SUMMARY ACTIONS [end] -->
+		
+		<action name="PreviousPageAction" class="gov.michigan.dit.timeexpense.action.PreviousPageAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+
+		<action name="DoNothing" class="gov.michigan.dit.timeexpense.action.DoNothingAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+			
+		<!-- isSelectCity Action class will determine if the "To" City/State/Expense Date combination is Select City -->		
+		<action name="isSelectCity" class="gov.michigan.dit.timeexpense.action.IsSelectCityAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<!-- isSelectCity Action class will determine if the "To" City/State/Expense Date combination is Select City -->		
+		<action name="isSelectCityExpense" class="gov.michigan.dit.timeexpense.action.IsSelectCityAction" method="isExpenseSelectCityExpense">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<!--  Start - Travel requisition actions -->
+		<action name="TravelRequisitionListAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionListAction" method="viewTravelRequisitionList">
+			<result name="success">/jsp/travelRequisition/travelRequisitionList.jsp</result>
+			<result name="input">/jsp/travelRequisition/travelRequisitionList.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="AjaxTravelRequisitionListAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionListAction" method="getTravelRequisitionList">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="TravelRequisitionDeleteAction"	class="gov.michigan.dit.timeexpense.action.TravelRequisitionListAction" method="deleteTravelRequisition">
+			<result name="success">/jsp/travelRequisition/travelRequisitionList.jsp</result>
+			<result name="input">/jsp/travelRequisition/travelRequisitionList.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+			<action name="TravelRequisitionAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionSessionScopeResetAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TravelRequisitionIdAction</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="TravelRequisitionIdAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionIdAction">
+			<result name="success">/jsp/travelRequisition/travelRequisitionTabControl.jsp</result>
+			<result name="input">/jsp/travelRequisition/travelRequisitionTabControl.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="SaveTravelRequisition" class="gov.michigan.dit.timeexpense.action.SaveTravelRequisitionAction">
+			<result name="*" type="JsonResult" />
+		</action>
+		
+		<action name="setTravelRequisitionUserSubjectInSession" class="gov.michigan.dit.timeexpense.action.TravelRequisitionListAction" method="setUserSubjectInSession">
+			<result name="success" type="redirectAction">TravelReqAction</result>
+			<result name="failure" >/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="TravelReqAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionSessionScopeResetAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TravelRequisitionIdAction</param>
+				<param name="namespace">/</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="TravelRequisitionSubmitAction" class="gov.michigan.dit.timeexpense.action.SaveTravelRequisitionAction" method="submitTravelRequisition">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="TravelRequisitionHistoryList" class="gov.michigan.dit.timeexpense.action.TravelRequisitionHistoryAction" method="getTravelRequisitionHistoryList">
+			<result name="success">/jsp/travelRequisition/travelRequisitionHistoryPage.jsp</result>
+			<result name="input">/jsp/travelRequisition/travelRequisitionHistoryPage.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="GetTravelRequisitionCodingBlocks" class="gov.michigan.dit.timeexpense.action.TravelRequisitionCodingBlockAction" method="getExpenseDetailCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+				<action name="TravelRequisitionCodingBlockSave" class="gov.michigan.dit.timeexpense.action.TravelRequisitionCodingBlockAction" method="saveCodingBlock">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+				<action name="TravelRequisitionCodingBlockAction" class="gov.michigan.dit.timeexpense.action.TravelRequisitionCodingBlockAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="PreviousTravelRequisitionRevision" class="gov.michigan.dit.timeexpense.action.TravelRequisitionIdAction" method="getPreviousRevision">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TravelReqAction</param>
+				<param name="namespace">/</param>
+				<param name="treqMasterId">${treqMasterId}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">TravelReqAction</param>
+				<param name="namespace">/</param>
+				<param name="treqMasterId">${treqMasterId}</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="NextTravelRequistionRevision" class="gov.michigan.dit.timeexpense.action.TravelRequisitionIdAction" method="getNextRevision">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TravelReqAction</param>
+				<param name="namespace">/</param>
+				<param name="treqMasterId">${treqMasterId}</param>
+			</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">TravelReqAction</param>
+				<param name="namespace">/</param>
+				<param name="treqMasterId">${treqMasterId}</param>
+			</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="TravelRequisitionApproveAction" class="gov.michigan.dit.timeexpense.action.SaveTravelRequisitionAction" method="approveTravelRequisition">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="TravelRequisitionRejectAction" class="gov.michigan.dit.timeexpense.action.SaveTravelRequisitionAction" method="rejectTravelRequisition">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="DisplayTravelRequisitionCodingBlock" class="gov.michigan.dit.timeexpense.action.TravelRequisitionCodingBlockAction" method="getCodingblockForDisplay">
+			<result name="success">/jsp/expense/displayTravelRequisitionCodingBlock.jsp</result>
+			<result name="input">/jsp/expense/displayTravelRequisitionCodingBlock.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="OpenTravelRequisitionReport" class="gov.michigan.dit.timeexpense.action.PrintTravelRequisitionAction">
+			<result name="success">/jsp/report/TravelRequisition-viewer.jsp</result> 
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		<action name="CreateExpenseFromTravelRequisition" class="gov.michigan.dit.timeexpense.action.SaveTravelRequisitionAction" method="createExpense">
+			<result name="*" type="JsonResult"></result>
+		</action>
+				
+		<!--  End - Travel requisition actions -->
+		
+		<!-- Action class to test if the user has PDF expense privileges. -->		
+		<action name="isPDFModuleAvailable" class="gov.michigan.dit.timeexpense.action.IsPDFModuleAvailable">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		<!-- Approval Queue actions -->
+		<action name="ApprovalQueueAction" class="gov.michigan.dit.timeexpense.action.ApprovalQueueAction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="ApprovalNextTransaction" class="gov.michigan.dit.timeexpense.action.ApprovalQueueAction" method="getNextApprovalTransaction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="RemoveApprovalTransaction" class="gov.michigan.dit.timeexpense.action.ApprovalQueueAction" method="removeApprovalTransaction">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		
+		<action name="ClearApprovalQueue" class="gov.michigan.dit.timeexpense.action.ApprovalQueueAction" method="clearApprovalQueue">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		<!-- End Approval Queue actions -->
+		<!-- Report Actions -->
+		<action name="TransactionLedgerReportParamsAction" class="gov.michigan.dit.timeexpense.action.TransactionLedgerReportParams">
+			<result name="*" type="JsonResult"></result>
+		</action>
+		<action name="viewReportsAction"	class="gov.michigan.dit.timeexpense.action.viewReportsAction">
+			<result name="success">/jsp/viewReports.jsp</result>
+			<result name="input">/jsp/travelRequisition/travelRequisitionList.jsp</result>
+			<result name="failure">/jsp/errorPage.jsp</result>
+		</action>
+		
+		</package>
+</struts>   

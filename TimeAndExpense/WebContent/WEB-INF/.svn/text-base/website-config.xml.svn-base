@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<website version="700">
+    <structure>
+        <page navroot="true" nid="9" src="/TimeAndExpense/jsp/homePage.jsp">
+            <title>Home Page</title>
+            <page nid="59" src="/TimeAndExpense/jsp/advanceListPage.jsp">
+                <title>Advance List</title>
+                <page nid="60" src="/TimeAndExpense/jsp/advanceTabPage.jsp">
+                    <title>Advance</title>
+                </page>
+            </page>
+            <page nid="82" src="/TimeAndExpense/jsp/travelRequisition/travelRequisitionList.jsp">
+                <title>Travel Requisition List</title>
+                <page nid="83" src="/TimeAndExpense/jsp/travelRequisition/travelRequisitionTabControl.jsp">
+                    <title>Travel Requisition</title>
+                </page>
+            </page>
+            <page nid="67" src="/TimeAndExpense/jsp/selectEmployee.jsp">
+                <title>Select Employee</title>
+                <page nid="59" src="/TimeAndExpense/jsp/advanceListPage.jsp">
+                    <title>Advance List</title>
+                    <page nid="60" src="/TimeAndExpense/jsp/advanceTabPage.jsp">
+                        <title>Advance</title>
+                    </page>
+                </page>
+            </page>
+            <page nid="67" src="/TimeAndExpense/jsp/selectEmployee.jsp">
+                <title>Select Employee</title>
+            </page>
+            <page nid="70" src="/TimeAndExpense/jsp/expense/ExpenseListPage.jsp">
+                <title>Expense List Page</title>
+                <page nid="72" src="/TimeAndExpense/jsp/expense/ExpenseTabPage.jsp">
+                    <title>Expense</title>
+                </page>
+            </page>
+            <page nid="73" src="/TimeAndExpense/jsp/managerApprove.jsp">
+                <title>Manager Approval Page</title>
+            </page>
+            <page nid="74" src="/TimeAndExpense/jsp/statewideApprove.jsp">
+                <title>State Wide Approve</title>
+            </page>
+            <page nid="75" src="/TimeAndExpense/jsp/transactionLedger.jsp">
+                <title>Reports - Employee</title>
+            </page>
+            <page nid="76" src="/TimeAndExpense/jsp/receiptsRequired.jsp">
+                <title>Reports - Employee</title>
+            </page>
+            <page nid="77" src="/TimeAndExpense/jsp/exceptionReport.jsp">
+                <title>Reports - Employee</title>
+            </page>
+            <page nid="78" src="/TimeAndExpense/jsp/routineTraveler.jsp">
+                <title>Reports - Employee</title>
+            </page>
+             <page nid="79" src="/TimeAndExpense/jsp/searchSystemCodes.jsp">
+                <title>Params >> Search System Codes</title>
+            </page> 
+             <page nid="80" src="/TimeAndExpense/jsp/editSystemCode.jsp">
+                <title>Params >> Edit System Code</title>
+            </page> 
+             <page nid="81" src="/TimeAndExpense/jsp/createSystemCode.jsp">
+                <title>Params >> Add New System Code</title>
+            </page> 
+              <page nid="82" src="/TimeAndExpense/jsp/agency/agencylocation.jsp">
+                <title>Search Agency Location</title>
+            </page> 
+              <page nid="83" src="/TimeAndExpense/jsp/agency/agencyTabPage.jsp">
+                <title>Agency Common Mileage</title>
+            </page>
+        </page>
+    </structure>
+</website>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="was.base.v7"/>
+  <fixed facet="com.businessobjects.sdks.jrc"/>
+  <fixed facet="web.template"/>
+  <installed facet="jst.java" version="5.0"/>
+  <installed facet="jst.web" version="2.4"/>
+  <installed facet="com.businessobjects.sdks.jrc" version="11.8.0"/>
+  <installed facet="web.template" version="1.0"/>
+</faceted-project>

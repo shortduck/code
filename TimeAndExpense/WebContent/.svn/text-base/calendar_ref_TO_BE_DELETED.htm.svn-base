@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<style type="text/css">@import url(css/calendar-win2k-1.css);</style>
+	<script type="text/javascript" src="js/calendar.js"></script>
+	<script type="text/javascript" src="js/calendar-en.js"></script>
+	<script type="text/javascript" src="js/calendar-setup.js"></script>
+	<script type="text/javascript" src="js/date.js"></script>
+	<script type="text/javascript" src="js/time_expense_calendar.js"></script>
+	<title>Multiple date selection calendar reference</title>
+</head>
+	<body onload="initMultipleDateCalendar();">
+		<form>
+		  <input type="text" id="fromDate" name="fromDate" onblur="syncFromDate(this); return true;"></input>
+		  <img src='image/calendar.gif' id="fromDateSelector" alt="Choose dates"></img>
+		  
+		  <input type="text" id="toDate" name="toDate" onblur="syncToDate(this); return true;"></input>
+		  <img src='image/calendar.gif' id="toDateSelector" alt="Choose dates"></img>
+		</form>
+	</body>
+</html>

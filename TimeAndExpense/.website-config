@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><website version="700">
+    <structure template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+        <description/>
+        <author/>
+        <page id="1" navroot="true" nid="9" src="/WebContent/jsp/homePage.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+            <title>Home Page</title>
+            <page id="2" nid="59" src="/WebContent/jsp/advanceListPage.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Advance List</title>
+                <page id="3" nid="60" src="/WebContent/jsp/advanceTabPage.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                    <title>Advance</title>
+                </page>
+            </page>
+            <page id="4" nid="67" src="/WebContent/jsp/selectEmployee.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Select Employee</title>
+                <page id="2" nid="59" src="/WebContent/jsp/advanceListPage.jsp" template="/WebContent/jsp/mainPageTemplate.jtpl">
+                    <title>Advance List</title>
+                    <page id="3" nid="60" src="/WebContent/jsp/advanceTabPage.jsp" template="/WebContent/jsp/mainPageTemplate.jtpl">
+                        <title>Advance</title>
+                    </page>
+                </page>
+            </page>
+            <page id="4" nid="67" src="/WebContent/jsp/selectEmployee.jsp" template="/WebContent/jsp/mainPageTemplate.jtpl">
+                <title>Select Employee</title>
+            </page>
+            <page id="5" nid="70" src="/WebContent/jsp/expense/ExpenseListPage.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Expense List Page</title>
+                <page id="6" nid="72" src="/WebContent/jsp/expense/ExpenseTabPage.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                    <title>Expense</title>
+                </page>
+            </page>
+            <page id="7" nid="73" src="/WebContent/jsp/managerApprove.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Manager Approval Page</title>
+            </page>
+            <page id="8" nid="74" src="/WebContent/jsp/statewideApprove.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>State Wide Approve</title>
+            </page>
+            <page id="9" nid="75" src="/WebContent/jsp/transactionLedger.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Reports - Employee</title>
+            </page>
+            <page id="10" nid="76" src="/WebContent/jsp/receiptsRequired.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Reports - Employee</title>
+            </page>
+            <page id="11" nid="77" src="/WebContent/jsp/exceptionReport.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Reprots - Employee</title>
+            </page>
+            <page id="12" nid="78" src="/WebContent/jsp/routineTraveler.jsp" template="tiles:/WebContent/jsp/dynamicMainPageTemplate.jsp#dynamicMainPageTemplate">
+                <title>Reports - Employee</title>
+            </page>
+        </page>
+    </structure>
+</website>

@@ -1,0 +1,121 @@
+/*
+ZH - 01/07/2009
+
+Styles for the main page template. The template is divided into 4 sections:
+
+1. Header
+2. Left navigation area
+3. Footer
+4. Page content area
+
+*/
+
+
+/*
+The styles below divide the template page into individual sections.
+*/
+
+@charset "utf-8";
+body  {
+	font-family: Arial, Helvetica, sans-serif;
+	background: #FFFFFF;
+	margin: 0; 
+	padding: 0;
+	
+}
+.mainTemplate #container { 
+	background: #FFFFFF;
+	text-align: left;
+} 
+.mainTemplate #header { 
+	padding: 5px 10px 5px 10px;
+
+	 
+} 
+.mainTemplate #header h1 {
+	margin: 0; 
+	padding: 10px 0; 
+}
+.mainTemplate #sidebar1 {
+	float: left; 
+	height:300px; 
+	background: #56A5EC; 
+	padding: 10px 2px 2px 2px;
+	margin-left:5px;
+}
+.mainTemplate #mainContent {
+    margin: 0 0 0 13%; 
+	padding: 0 10px;
+		
+} 
+.mainTemplate #footer { 
+	padding: 0 10px 0 10px; 
+	margin-left:10px;
+	margin-top: 7%;
+
+} 
+.mainTemplate #footer p {
+	margin: 0; 
+	padding: 10px 0; 
+}
+.fltrt { 
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { 
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { 
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+
+/*Footer Styles*/
+.bottomnavlinks {color: Black;font-size:80%;}
+#bodytd .bottomnavlinks{color: Black;font-size:80%;}
+.bottomnavlinks:link{color: Black;font-size:80%;}
+.bodylinks {color :Black;font-size : 80%;;
+	background-color: green}
+.copyright {font-size: 80%;}
+/*/*/
+.copyright {font-size:60%;}
+/**/
+
+/*Added to make the tooltip yellow for all the dependent pages. */
+.dijitTooltipContainer {
+	position: absolute;
+	left: 0;
+	top: -20;
+	background-color: F9F7BA;
+	border: 1px solid gray;
+	max-width: 450px;
+	font-size: smaller;
+	width: 150px;
+	text-align: left;
+}
+.ie11_button{
+	padding: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+input[type=button] {
+	padding: 3px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+input[type=submit] {
+    padding: 3px;
+	margin-left: 2px;
+	margin-right: 2px;    
+}
+
+button {
+    padding: 3px;
+	margin-left: 2px;
+	margin-right: 2px;	
+}

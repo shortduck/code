@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><%@page
+	language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="s" uri="/struts-tags"%><%@taglib
+	uri="http://www.ibm.com/siteedit/sitelib" prefix="siteedit"%>
+<%@ page import="gov.michigan.dit.timeexpense.model.core.UserProfile" %> 
+<%
+// This is required to force no caching in IE
+response.setHeader("Cache-Control","no-cache"); 
+response.setHeader("Pragma","no-cache"); 
+response.setDateHeader ("Expires", -1);
+%>
+
+<html>
+<head>
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<%-- tpl:insert attribute="headarea" --%>
+	<title>Main Application Template</title>
+<%-- /tpl:insert --%>
+
+<!-- Needed for yahoo menu -->
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/yahoo/reset-fonts-grids.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/css/yahoo/menu.css">
+	
+<!-- The template css file setsup the separate reas of the template -->
+<link href="${pageContext.request.contextPath}/css/mainTemplate.css"
+	rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+#TimeAndExpenseMenu {
+	position: static;
+}
+
+#TimeAndExpenseMenu .yuimenuitemlabel {
+	_zoom: 1;
+}
+
+#TimeAndExpenseMenu .yuimenu .yuimenuitemlabel {
+	_zoom: normal;
+}
+</style>
+
+<!-- Dependency source files -->
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/yahoo/yahoo-dom-event.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/yahoo/container_core.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/forms.js"></script>
+
+<script type="text/javascript">
+	dojo.require("dojox.grid.EnhancedGrid");
+	dojo.require("dojox.grid.enhanced.plugins.Filter");
+	dojo.require("dojo.parser");
+	dojo.require("dojox.data.QueryReadStore");
+	dojo.require("dojo.data.ItemFileReadStore");
+	dojo.require("dijit.Dialog");
+	dojo.require("dijit.form.Button");
+	dojo.require("dijit.layout.TabContainer");
+	dojo.require("dijit.layout.ContentPane");
+	dojo.require("dojox.grid.DataGrid");
+	dojo.require("dijit.dijit");
+</script>            
+
+<!-- Menu source file -->
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/yahoo/menu.js"></script>
+
+<!-- Page-specific script -->
+<script type="text/javascript">
+
+         
+            YAHOO.util.Event.onContentReady("TimeAndExpenseMenu", function () {
+                var oMenu = new YAHOO.widget.Menu("TimeAndExpenseMenu", { 
+                                                        position: "static", 
+                                                        hidedelay:  750, 
+                                                        lazyload: true });
+                oMenu.render();            
+            });
+
+	dojo.addOnLoad(function() {
+	if (dojo.byId('moveForward').value == 'true' && window.name != location.href){
+		// This will move forward one page in history in case history exists. A page refresh
+		// will not forward. 
+			if (window.name != 'forwarded') {
+				history.forward();
+				window.name = 'forwarded';
+			} else {
+				window.name = '';
+			}
+	} 
+		if (window.name == "" || window.name != 'forwarded'){
+			window.name = location.href;
+		}
+		
+		window.onbeforeunload = checkFormState;
+		startTimer();
+		dojo.connect(window, "onresize", resizeGrid);
+	});
+	
+	
+	var timerVar;
+	var logout;
+
+	if( document.captureEvents && Event.KEYUP ) 
+	{
+	  document.captureEvents( Event.KEYUP );
+	}
+
+	document.onkeyup = resetTimer;
+	document.onclick = resetTimer;
+
+	function dialogSessionContinueLogout()
+	{
+		dijit.byId('dialogSessionContinueLogout').show();
+		dojo.byId('btnContinue').focus();
+		window.onbeforeunload = null;
+		// Set continue timeout to 5 minutes. User will be logged out after 5 minutes if Continue has not been
+		// clicked
+		logout = setTimeout('logoutClick();',300000);
+	}
+
+	function startTimer()
+	{
+		// Set timeout to display the popup after 24 minutes.
+		timerVar=setInterval('dialogSessionContinueLogout();', 1440000);
+	}
+
+	function resetTimer()
+	{
+		clearInterval(timerVar);
+		clearTimeout(logout);
+		startTimer();
+	}
+
+	function continueClick()
+	{
+		dijit.byId('dialogSessionContinueLogout').hide();
+		keepSessionAlive();
+		window.onbeforeunload = checkFormState;
+		resetTimer();
+	}
+
+	function logoutClick()
+	{
+		window.location.href='${pageContext.request.contextPath}/jsp/logout.jsp';
+		dijit.byId('dialogSessionContinueLogout').hide();
+	}
+	function helpFunction(type)
+	{
+		if (type == "contactus") {
+			window.open((document.getElementById("contactusurl").value));
+		} else if (type == "faq") {
+			window.open((document.getElementById("faqurl").value));	
+		} else if (type == "training") {
+			window.open((document.getElementById("trainingurl").value));
+		}
+	}
+	
+	function resizeGrid() {
+	   var tables = document.getElementsByTagName("Div");
+	   for (var i = 0; i < tables.length; i++){
+	   		 var table = dijit.byId(tables[i].id);
+ 			 if (table != undefined){
+     			if (table.declaredClass == 'dojox.grid.EnhancedGrid'){
+     				table.resize();
+     				table.update(); 
+     			}
+ 			}
+	   }
+	}            
+</script>
+
+<!-- End yahoo menu setup -->
+<link rel="stylesheet" type="text/css"
+	href="/TimeAndExpense/theme/horizontal-trail.css">
+</head>
+<body class="soria mainTemplate">
+
+<div id="container">
+
+
+<!-- changes by Omkar start -->
+<div id="header"><img border="0" style="width: 100%"
+	src="${pageContext.request.contextPath}/image/time-expense.jpg">
+</div>
+<!-- changes by Omkar end -->
+
+<div id = "welcome" style="position:absolute;right:3%">
+Welcome
+<b>
+<s:property value="%{#session.User.userId}" />
+</b>
+<a href="${pageContext.request.contextPath}/jsp/logout.jsp">[logout]</a>
+</div>
+<div dojoType="dijit.Dialog" id="dialogSessionContinueLogout" title="<b>Your Session is about to expire in 5 minutes.<br> Please click Continue to refresh the current page or Logout.</b>" 
+		style="border: 1px ; background: white; display: none">
+    <table>
+       <button dojoType=dijit.form.Button id="btnContinue" onclick="continueClick();">Continue</button>
+       <button dojoType=dijit.form.Button id="btnLogout" onclick="logoutClick();">Logout</button>
+    </table>
+</div>
+
+
+<!-- Menu Definition. The menu options will be toggled according to the security settings -->
+<div id="sidebar1">
+
+<center><b>Main Menu</b></center>
+<BR>
+<div id="TimeAndExpenseMenu" class="yui-skin-sam yuimenu"
+	style="width: 100px;">
+<div class="bd">
+<ul class="first-of-type">
+	<li class="yuimenuitem first-of-type"><a class="yuimenuitemlabel"
+		href="HomePageAction.action">Home Page</a></li>
+	<li class="yuimenuitem first-of-type"><a class="yuimenuitemlabel"
+		href="#">Employee</a>
+
+	<div id="employee" class="yuimenu">
+	<div class="bd">
+	<ul>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.empAdvance}"/>"><a
+			class="yuimenuitemlabel" href="AdvanceListAction.action?moduleId=ADVW001">Advances</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.empNonRoutineTravelRequisition}"/>"><a
+			class="yuimenuitemlabel" href="TravelRequisitionListAction.action?moduleId=NTRW001">Non-Routine Travel Requisitions</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.empExpense}"/>"><a
+			class="yuimenuitemlabel" href="ViewExpenseList.action?moduleId=EXPW001">Expenses</a></li>
+		<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.empReports}"/>"><a class="yuimenuitemlabel" href="#">Reports</a>
+		<div id="reportEmployee" class="yuimenu">
+		<div class="bd">
+		<ul class="first-of-type">
+			<li class="yuimenuitem" 
+			style="display:<s:property value="%{#session.LeftNavOptions.emp_REPORT_EXCEPTION}"/>">
+			<a class="yuimenuitemlabel" href="ExceptionReport.action?moduleId=EXPR002">Exceptions</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.emp_REPORT_RECEIPTS_REQUIRED}"/>">
+			<a class="yuimenuitemlabel" href="ReceiptsRequiredReport.action?moduleId=EXPR001">Receipts
+			Required</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.emp_REPORT_ROUTINE_TRAVELER}"/>"><a class="yuimenuitemlabel" href="RoutineTraveler.action?moduleId=EXPR003"
+			>Routine
+			Traveler</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.emp_REPORT_TRANSACTION_LEDGER}"/>"><a class="yuimenuitemlabel" href="TransactionLedgerReport.action?moduleId=EXPR004"
+			>Transaction
+			Ledger</a></li>
+		</ul>
+		</div>
+		</div>
+		</li>
+	</ul>
+	</div>
+	</div>
+
+	</li>
+	<li class="yuimenuitem"><a class="yuimenuitemlabel"
+		href="#">Manager</a>
+
+	<div id="teManager" class="yuimenu">
+	<div class="bd">
+	<ul>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.mngrAdvance}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=ADVW002">Advances</a></li>
+			<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.mngrNonRoutineTravelRequisition}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=NTRW002">Non-Routine Travel Requisitions</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.mngrApproval}"/>"><a
+			class="yuimenuitemlabel" href="ManagerApprove.action?moduleId=APRW003">Approvals</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.mngrExpense}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=EXPW002">Expenses</a></li>
+		<li class="yuimenuitem"
+		style="display:<s:property value="%{#session.LeftNavOptions.mngrReports}"/>"><a class="yuimenuitemlabel"
+			href="#">Reports</a>
+		<div id="reportManager" class="yuimenu">
+		<div class="bd">
+		<ul class="first-of-type">
+			<li class="yuimenuitem" 
+			style="display:<s:property value="%{#session.LeftNavOptions.mngr_REPORT_EXCEPTION}"/>"
+			><a class="yuimenuitemlabel" href="ExceptionReport.action?moduleId=EXPR006">Exceptions</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.mngr_REPORT_RECEIPTS_REQUIRED}"/>">
+			<a class="yuimenuitemlabel" href="ReceiptsRequiredReport.action?moduleId=EXPR005">Receipts
+			Required</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.mngr_REPORT_ROUTINE_TRAVELER}"/>">
+			<a class="yuimenuitemlabel" href="RoutineTraveler.action?moduleId=EXPR007">Routine
+			Traveler</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.mngr_REPORT_TRANSACTION_LEDGER}"/>">
+			<a class="yuimenuitemlabel" href="TransactionLedgerReport.action?moduleId=EXPR008">Transaction
+			Ledger</a></li>
+		</ul>
+		</div>
+		</div>
+		</li>
+	</ul>
+	</div>
+	</div>
+
+	</li>
+	<li class="yuimenuitem"><a class="yuimenuitemlabel"
+		href="#">Statewide</a>
+
+	<div id="statewide" class="yuimenu">
+	<div class="bd">
+	<ul>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.swAdvance}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=ADVW003">Advances</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.swNonRoutineTravelRequisition}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=NTRW003">Non-Routine Travel Requisitions</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.swApproval}"/>"><a
+			class="yuimenuitemlabel" href="StateWideApproval.action?moduleId=APRW004">Approvals</a></li>
+		<li class="yuimenuitem"
+			style="display:<s:property value="%{#session.LeftNavOptions.swExpense}"/>"><a
+			class="yuimenuitemlabel" href="SelectEmployee.action?moduleId=EXPW003">Expenses</a></li>
+		<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.swReports}"/>"><a class="yuimenuitemlabel"
+			href="#">Reports</a>
+		<div id="reportStatewide" class="yuimenu">
+		<div class="bd">
+		<ul class="first-of-type">
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_REPORT_EXCEPTION}"/>">
+			<a class="yuimenuitemlabel" href="ExceptionReport.action?moduleId=EXPR010">Exceptions</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_REPORT_RECEIPTS_REQUIRED}"/>">
+			<a class="yuimenuitemlabel"  href="ReceiptsRequiredReport.action?moduleId=EXPR009">Receipts
+			Required</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_REPORT_ROUTINE_TRAVELER}"/>">
+			<a class="yuimenuitemlabel" href="RoutineTraveler.action?moduleId=EXPR011">Routine
+			Traveler</a></li>
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_REPORT_TRANSACTION_LEDGER}"/>">
+			<a class="yuimenuitemlabel" href="TransactionLedgerReport.action?moduleId=EXPR012">Transaction
+			Ledger</a></li>
+		</ul>
+		</div>
+		</div>
+		</li>
+	 	<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.swParams}"/>">
+		<a class="yuimenuitemlabel"		href="#">Params</a>
+		<div id="paramStatewide" class="yuimenu">
+		<div class="bd">
+		<ul class="first-of-type"> 
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_PARAM_SYSTEM_CODES}"/>">
+			<a class="yuimenuitemlabel" href="systemCodesInitialize.action?moduleId=PRMW079">System Codes</a></li>
+		</ul>
+		</div>
+		</div>
+		</li>  
+		<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.swAgencyOptions}"/>">
+		<a class="yuimenuitemlabel"	href="#">Agency Options</a>
+		<div id="agencyStatewide" class="yuimenu">
+		<div class="bd">
+		<ul class="first-of-type"> 
+			<li class="yuimenuitem" style="display:<s:property value="%{#session.LeftNavOptions.sw_Agency_Locations}"/>">
+			<a class="yuimenuitemlabel" href="agyLocationInitialize.action?moduleId=AGYW001">Agency Locations</a></li>
+		</ul>
+		</div>
+		</div>
+		</li>  
+		 
+	</ul>
+	</div>
+	</div>
+	</li>
+	<li class="yuimenuitem"><a class="yuimenuitemlabel"
+		href="#">Help</a>
+	<div id="help" class="yuimenu">
+	<div class="bd">
+	<!-- Contact Us references have now been changed to Helpful Tips. All code remains the same -->
+	<ul>
+		<li class="yuimenuitem"><a class="yuimenuitemlabel" href="#" onclick="helpFunction('faq');">FAQ</a></li>
+		<li class="yuimenuitem"><a class="yuimenuitemlabel" href="#" onclick="helpFunction('training');">Training</a></li>
+		<li class="yuimenuitem"><a class="yuimenuitemlabel" href="#" onclick="helpFunction('contactus');">Helpful Tips</a></li>
+	</ul>
+	</div>
+	</div>
+	</li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<!-- Hidden fields needed for error display from pages with input forms -->
+
+<div style="display:none">
+	<s:textfield id="validationErrors" value="%{validationErrorsJson}" theme="simple"/> 
+	<s:textfield id="bizErrors" value="%{errorsJson}" theme="simple"/>
+	<s:textfield id="contactusurl" value="%{#session.URLCNT}"/>
+	<s:textfield id="faqurl" value="%{#session.URLFAQ}"/>
+	<s:textfield id="trainingurl" value="%{#session.URLTRNG}"/>
+	<s:textfield id="moveForward" value="%{moveForward}"/>
+</div>
+
+<!-- content from included page will appear in the div below -->
+<div id="mainContent" class="soria">
+<siteedit:navtrail target="home,parent,ancestor,self" start=""
+	separator="&gt;&gt;" end=""
+	spec="/TimeAndExpense/jsp/horizontal-trail.jsp"></siteedit:navtrail>
+<%-- tpl:insert attribute="bodyarea" --%><%-- /tpl:insert --%>
+</div>
+
+<br class="clearfloat" />
+<center>
+
+<div id="footer"><%-- tpl:insert page="/jsp/footer.jspf" --%><table border='0' cellspacing='0' cellpadding='0' align="center">
+						<tr>
+							<td align='center' valign="bottom" height="85"><!-- Footer HTML Memory Cache #3 Wed Jun 04 08:42:13 2008 --><br>
+							<a href='http://www.michigan.gov/' class='bottomnavlinks' target = "_blank">Michigan.gov Home</a><!-- agyHorizontalLinks BOTTOM_NAV_LINKS 
+--><span class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-32874-146--,00.html'
+								class='bottomnavlinks' target = "_blank">Help &amp; Contacts</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-29929---A,00.html'
+								class='bottomnavlinks' target = "_blank">State Web Sites</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-41470-142612--,00.html'
+								class='bottomnavlinks' target = "_blank">Awards</a><br>
+							<a href='http://www.michigan.gov/som/0,1607,7-192-26913-2090--,00.html'
+								class='bottomnavlinks' target = "_blank">Accessibility Policy</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-26914-2088--,00.html'
+								class='bottomnavlinks' target = "_blank">Privacy Policy</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-26915-2089--,00.html'
+								class='bottomnavlinks' target = "_blank">Link Policy</a><span class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-26916-2301--,00.html'
+								class='bottomnavlinks' target = "_blank">Security Policy</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a href='http://www.michigan.gov/minewswire'
+								target='_new' class='bottomnavlinks' target = "_blank">Michigan News</a><span
+								class='linkdivider'>&nbsp;|&nbsp;</span><a
+								href='http://www.michigan.gov/som/0,1607,7-192-26913-115596--,00.html'
+								class='bottomnavlinks' target = "_blank">Michigan.gov Survey</a><br>
+							<span class='copyright'><br>
+							Copyright &copy; 2001-2008 State of Michigan</span><!-- Footer HTML Memory Cache / --></td>
+						</tr>
+					</table>
+
+
+
+<%-- /tpl:insert --%></div>
+</center>
+
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="TimeAndExpensePU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<non-jta-data-source>jdbc/TimeAndExpenseDatasource</non-jta-data-source>
+		<class>gov.michigan.dit.timeexpense.model.core.States</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Security</class>
+		<class>gov.michigan.dit.timeexpense.model.core.User</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Department</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Agency</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Tku</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuPK</class>
+
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseLocations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseProfileRules</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseProfiles</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseDetailCodingBlocks</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseRates</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseTypes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseTypeRules</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpensesList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpApprovalList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.NotificationReceivers</class>	
+	
+		
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceDetailCodingBlocks</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceLiquidations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceLiquidationsPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VAdvApprovalList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VTravelReqList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VTreqApprovalList</class>
+		
+      
+		<class>gov.michigan.dit.timeexpense.model.core.SystemCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.SystemCodesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuoptTaOptions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuoptTaOptionsPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyOptions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyOptionsPK</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.DefaultDistributionsAdvAgy</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyCommonMileages</class>
+		<class> gov.michigan.dit.timeexpense.model.core.CommonMileages</class>
+		<class> gov.michigan.dit.timeexpense.model.core.CommonMileagesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.db.ErrorMessages</class>
+		<class>gov.michigan.dit.timeexpense.model.core.StateAuthCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VAdvanceList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AppointmentListBean</class>
+		<class>gov.michigan.dit.timeexpense.model.core.OutOfStateTravel</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.AppointmentHistory</class>
+		<class>gov.michigan.dit.timeexpense.model.db.Appointments</class>
+		<class>gov.michigan.dit.timeexpense.model.db.HrmnDeptCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.db.HrmnDeptCodesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.db.PayTypes</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.Appointment</class>
+		<class>gov.michigan.dit.timeexpense.model.core.RefCodes</class>		
+		
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqDetailCodingBlock</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqOutOfState</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.DriverReimbExpTypeCbs</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VReceiptsRequiredReport</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VReceiptsRequiredReportPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.PersonnelHistories</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpenseLocations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.WebReportParams</class>
+		
+		<properties>
+			<property name="openjpa.Log" value="DefaultLevel=ERROR, Runtime=ERROR, Tool=TRACE, SQL=TRACE" />
+		   	<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
+			<property name="openjpa.jdbc.DBDictionary" value="batchLimit=-1"/>
+		</properties>
+	</persistence-unit>
+
+	<persistence-unit name="TimeAndExpensePU_Test"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <class>gov.michigan.dit.timeexpense.model.core.States</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Security</class>
+		<class>gov.michigan.dit.timeexpense.model.core.User</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Department</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Agency</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.Tku</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuPK</class>
+
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseLocations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseProfileRules</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseProfiles</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseDetailCodingBlocks</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseRates</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseTypes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.ExpenseTypeRules</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpensesList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpApprovalList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.NotificationReceivers</class>	
+	
+		
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceDetailCodingBlocks</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceLiquidations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceLiquidationsPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AdvanceMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VAdvApprovalList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VTravelReqList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VTreqApprovalList</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.SystemCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.SystemCodesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuoptTaOptions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TkuoptTaOptionsPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyOptions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AgencyOptionsPK</class>
+		 
+		<class>gov.michigan.dit.timeexpense.model.core.DefaultDistributionsAdvAgy</class>
+		 <class>gov.michigan.dit.timeexpense.model.core.AgencyCommonMileages</class>
+         <class> gov.michigan.dit.timeexpense.model.core.CommonMileages</class>
+		<class> gov.michigan.dit.timeexpense.model.core.CommonMileagesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.db.ErrorMessages</class>
+		<class>gov.michigan.dit.timeexpense.model.core.StateAuthCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VAdvanceList</class>
+		<class>gov.michigan.dit.timeexpense.model.core.AppointmentListBean</class>
+		<class>gov.michigan.dit.timeexpense.model.core.OutOfStateTravel</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.AppointmentHistory</class>
+		<class>gov.michigan.dit.timeexpense.model.db.Appointments</class>
+		<class>gov.michigan.dit.timeexpense.model.db.HrmnDeptCodes</class>
+		<class>gov.michigan.dit.timeexpense.model.db.HrmnDeptCodesPK</class>
+		<class>gov.michigan.dit.timeexpense.model.db.PayTypes</class>
+		
+		<class>gov.michigan.dit.timeexpense.model.core.Appointment</class>
+		<class>gov.michigan.dit.timeexpense.model.core.RefCodes</class>		
+		
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqActions</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqDetailCodingBlock</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqDetails</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqEvents</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqMasters</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqOutOfState</class>
+		<class>gov.michigan.dit.timeexpense.model.core.TravelReqErrors</class>
+		<class>gov.michigan.dit.timeexpense.model.core.DriverReimbExpTypeCbs</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VReceiptsRequiredReport</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VReceiptsRequiredReportPK</class>
+		<class>gov.michigan.dit.timeexpense.model.core.PersonnelHistories</class>
+		<class>gov.michigan.dit.timeexpense.model.core.VExpenseLocations</class>
+		<class>gov.michigan.dit.timeexpense.model.core.WebReportParams</class>
+		
+
+
+		<properties>
+			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver" />
+			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@hrmnd:1525:hrdv" />
+			<property name="openjpa.ConnectionUserName" value="web_dcds" />
+			<property name="openjpa.ConnectionPassword" value="web_dcds" />
+			<property name="openjpa.Log" value="DefaultLevel=ERROR, Runtime=ERROR, Tool=TRACE, SQL=TRACE" />
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
+			<property name="openjpa.jdbc.DBDictionary" value="batchLimit=-1"/>
+		</properties>
+
+
+<!-- 		 
+		<properties>
+			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver" />
+			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@hrmnd:1525:hrmnd4" />
+			<property name="openjpa.ConnectionUserName" value="smithm6" />
+			<property name="openjpa.ConnectionPassword" value="smithm69" />
+			<property name="openjpa.Log" value="DefaultLevel=ERROR, Runtime=ERROR, Tool=TRACE, SQL=TRACE" />
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
+			<property name="openjpa.jdbc.DBDictionary" value="batchLimit=-1"/>
+		</properties>
+	-->			 
+<!-- 
+				<properties>
+			<property name="openjpa.ConnectionDriverName" value="oracle.jdbc.OracleDriver" />
+			<property name="openjpa.ConnectionURL" value="jdbc:oracle:thin:@hrmnd:1525:hrmnd1" />
+			<property name="openjpa.ConnectionUserName" value="web_dcds" />
+			<property name="openjpa.ConnectionPassword" value="web_dcds" />
+			<property name="openjpa.Log" value="DefaultLevel=ERROR, Runtime=ERROR, Tool=TRACE, SQL=TRACE, QUERY=TRACE" />
+			<property name="openjpa.jdbc.SchemaFactory" value="native(ForeignKeys=true)"/>
+			<property name="openjpa.jdbc.DBDictionary" value="batchLimit=-1"/>
+		</properties>
+		 -->
+	</persistence-unit>
+
+</persistence>

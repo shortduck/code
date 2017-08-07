@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+Build script for Time and Expense project
+
+Initial Version
+
+ZH - 06/10/2009
+
+The script performs typical build operations for a web application. Specific steps for the projects inlcude the following:
+
+1) All application code is gathered from the Serena repository. The Serena/PVCS client must be installed on the machine
+   where the build is being performed
+2) OpenJPA Enahancement is performed after compilation
+3) The EAR file is delivered to the pending deployment directory on the network 
+
+ZH - 02/05/2010
+1) Added auto numbering for creating version labels
+2) Performed script cleanup
+
+Bhurat, Ankit 04/12/2012
+1. Added SVN checkout (to get latest from subversion)
+
+TODO LIST:
+1. echo checkout files
+2. svn Jar files should come from the svn checkout and not from the current directory.
+
+-->
+
+<!-- START HERE 
+
+Configurations:
+
+1. basedir: Directory where the code will be taken latest. This is from the built will happen.
+2. svnJars: Directory where the snv jars viz. svnant.jar, svnClientAdapter.jar are located.
+
+-->
+
+<project name="Time And Expense"  default="build-ear" basedir="C:/Dev/build/TimeAndExpense">
+
+	<!-- set global properties for this build -->
+	
+	<!-- Paths -->
+	<property name="copy" value="C:/dev/build" />
+	<property name="src" value="${basedir}/src" />
+	<property name="webContent" value="${basedir}/WebContent" />
+	<property name="build" value="${basedir}/WebContent/WEB-INF/classes" />
+	<property name="lib" value="${basedir}/WebContent/WEB-INF/lib" />
+	<property name="dist" value="${basedir}/distribution" />
+	<property name="pendingDeployment" value="S:/HRS/SYSTEST/TimeAndExpenseWeb" /> 
+	<!-- <property name="pendingDeployment" value="c:\archive" /> -->
+	
+	<!-- Path of this workspace. This workspace should have the  svnant.jar, -->
+	<property name="svnJars" value="C:/Dev/svnJars" />
+
+	<!-- Repository URL: PAth of the branch from where the code should be taken latest.-->	
+	<property name="repository" value="svn://hcs071mwebpa001:5631/HRSrepository/MiTES/IE11/TimeAndExpense" />
+	
+	<property environment="env" />
+
+	<!-- <property name="ECLIPSE_HOME" value="../../../../IBM/SDP" /> -->
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.5" />
+	<property name="source" value="1.5" />
+
+	<!-- Define classpath for the project-->
+	<path id="WebLib.cp">
+		<fileset dir="${basedir}/WebContent/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="path.svnant">
+		<pathelement location="${svnJars}/svnant.jar" />
+		<pathelement location="${svnJars}/svnClientAdapter.jar" />
+	</path>
+	
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="path.svnant" />
+	<svnSetting
+        javahl="false"
+        svnkit="false"
+        username="bhurata"
+        password="bhurata"
+        id="svn.settings"
+    />
+	
+	<!-- Delete the existing directory trees --> 
+	<target name="clean">		
+		<delete dir="${basedir}" />
+		<sleep minutes="2"/>
+	</target>
+	
+	<!-- Create the build directory structure used by compile --> 
+	<target name="init" depends="clean">
+		<mkdir dir="${basedir}" />
+		<mkdir dir="${dist}" />
+	</target>
+	
+	<!-- get code from repository -->
+	<target name="getLatestCode" depends="init">
+		<svn refid="svn.settings">
+			<checkout url="${repository}" revision="HEAD" destPath="${basedir}" />
+		</svn>
+	</target>
+
+	<path id="TimeAndExpense.classpath">
+		<pathelement location="${basedir}/WebContent/WEB-INF/classes" />
+		<path refid="WebLib.cp" />
+	</path>
+	
+	<!-- Make build directory  -->
+	<target name="init2" depends="getLatestCode">
+		<mkdir dir="${build}" />
+	</target>
+	
+	
+	<!-- compile code --> 
+	<target name="compile" depends="init2">
+		<javac srcdir="${src}" destdir="${build}" nowarn="true" source="${source}" target="${target}">
+			<classpath refid="TimeAndExpense.classpath" />
+		</javac>
+	</target>	
+	
+	<target name="compile-js">
+		<mkdir dir="${webContent}/js-compiled/js"/>
+		<apply executable="java" parallel="false">
+		    	<fileset dir="${webContent}/js" includes="*.js"/>
+		    	
+		        <arg line="-jar"/>
+		        <arg path="${lib}/compiler.jar"/>
+				<arg line="--js"/>
+		    	 <srcfile/> 
+		    	<arg line="--js_output_file"/>
+		    	 <mapper type="glob" from="*.js" to="${webContent}/js-compiled/js/*.js"/>
+		    	 <targetfile/>
+		</apply>
+	</target>
+	
+	<!-- Perform OpenJPA enhancement  
+	<target name="JPAEnhance" depends="compile">
+		<taskdef name="openjpac" classname="org.apache.openjpa.ant.PCEnhancerTask">
+			<classpath refid="TimeAndExpense.classpath" />
+		</taskdef>
+		<openjpac>
+			<config propertiesFile="${basedir}/src/META-INF/persistence.xml" />
+			<classpath refid="TimeAndExpense.classpath" />
+			<fileset dir="${basedir}/src">
+				<include name="**/model/db/*.java" />
+				<include name="**/model/core/*.java" />
+			</fileset>
+		</openjpac>
+	</target>
+	-->
+	
+	<!-- Build application WAR file -->  
+	<target name="build-war" depends="compile">
+		<war destfile="${dist}/TimeAndExpense.war" webxml="${basedir}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${basedir}/WebContent">
+				<exclude name="**/extras/*.*" />
+				<exclude name="**/junit.jar" />
+				<exclude name="**/ojdbc14.jar" />
+				<exclude name="**/svnant.jar" />
+				<exclude name="**/svnClientAdapter.jar" />
+				<exclude name="**/svnjavahl.jar" />
+				<exclude name="**/ojdbc14.jar" />
+				<exclude name="**/compiler.jar" />
+				<exclude name="**/ws_runtime.jar" />
+			</fileset>
+			<fileset dir="${basedir}/src" casesensitive="yes">
+				<include name="**/*.xml" />
+				<include name="**/*.java" />
+			</fileset>
+			
+			<fileset dir="${basedir}" casesensitive="yes">
+				<include name="build.number" />
+			</fileset>
+		</war>
+	</target>
+	
+	
+	<!-- Build application EAR file --> 
+	<target name="build-ear" depends="build-war">
+		<echo message="Building EAR File" />
+
+		<ear destfile="${dist}/TimeAndExpense.ear" appxml="${basedir}/application.xml">
+			<fileset dir="${dist}" includes="*.war" />
+		</ear>
+		<delete file="${dist}/TimeAndExpense.war">
+		</delete>
+	
+	
+	<!-- copy for deployment   -->
+		<copy todir="${pendingDeployment}">
+			<fileset dir="${dist}" />
+		</copy>
+		
+	<!-- Add version labels -->
+	 	<antcall target="addVersionLabel" />
+	 	
+		<!-- copy for archives  -->
+		<property file="${basedir}/build.number"/>	
+		<property name="versionLabel" value="${major.number}.${minor.number}.${maintenance.number}" />
+	 	<copy file="${dist}/TimeAndExpense.ear" tofile="${pendingDeployment}/TimeAndExpense_${versionLabel}.ear" />
+	 	
+		<!-- Zip Java Source Files -->
+	 	<antcall target="zipJavasource">
+        </antcall>
+        
+	</target>
+	
+ 
+	<!-- Make zip of source and assign version number -->
+	<target name="zipJavasource" depends="" >
+		<property file="${basedir}/build.number" />
+		<property name="versionLabel" value="${major.number}.${minor.number}.${maintenance.number}"></property>
+		<zip basedir="${src}" destfile="${dist}/TimeAndExpense_${versionLabel}_src.zip" includes="**/*.java">
+		</zip>
+		<copy todir="${pendingDeployment}">
+			<fileset dir="${dist}">
+				<include name="*.zip" />
+			</fileset>
+		</copy>		
+		<echo>versionLabel: ${versionLabel}</echo>
+	</target>	
+	
+	
+	<!-- Create version label -->	
+		<target name="addVersionLabel" depends="">
+			<!-- increment build number -->
+				<propertyfile file="${basedir}/build.number">
+					<entry key="maintenance.number" value="=" type="int" operation="+"/>				
+				</propertyfile>
+			
+			<!-- check in modified build.number file -->	
+			<svn refid="svn.settings">
+				<commit file="${basedir}/build.number" message="ANT Script: build.number commited with new maintenance number." />
+			</svn>
+			
+			<!-- Create new version label -->		
+							<property file="${basedir}/build.number"/>	
+							<property name="versionLabel" value="${k}.${minor.number}.${maintenance.number}"></property>
+							<echo>version label is ${versionLabel}</echo>						
+		</target>
+
+	</project>
+

@@ -1,0 +1,501 @@
+ .dijitDialogUnderlayWrapper.dijitDialog
+{
+ background: white; 
+ border-top:3px solid #E5EDF4;
+ border-left:3px solid #E5EDF4;
+ border-right:3px solid #E5EDF4;
+ border-bottom:3px solid #E5EDF4; 
+ height: 400px;
+ width:350px;
+ }
+.dijitDialogUnderlayWrapper .dijitDialog .dijitDialogPaneContent  
+ {
+   width :300px;
+   height:400px;
+ }
+.dojoxGridFDTitlePane .dijitDialog{
+	width: 300px;
+	height: 200px;
+}
+.dijitDialogUnderlayWrapper.dijitDialog.dijit_a11y .dojoxGridFDTitlePane .dijitArrowButtonInner{ 	
+display:none !important;
+}
+ 
+.dijitDialogUnderlayWrapper.dijitDialog.dijitDialogTitleBar
+{
+font-size: 8pt; 
+font-family: Verdana,Arial, Helvetica, sans-serif;
+background: #b8cbec; 
+}
+/*         Above part do not change */
+.dojoxGridFStatusTip th {
+	background-color: #E8EFF4;
+	border-bottom: 1px solid #BCBCBC;
+}
+.dijitDialog .dojoxGridFBarInfoTD .dojoxGridFBarClearFilterBtn .dijitButtonNode,
+.dojoxGridFBarInfoTD .dojoxGridFBarCloseBtn .dijitButtonNode,
+.dojoxGridFDPane .dijitAccordionTitle .dijitButtonNode,
+.dojoxGridFStatusTipDetail .dijitButton .dijitButtonNode {
+	-moz-border-radius: 0;
+	-moz-box-shadow: none;
+	-webkit-border-radius: 0;
+	-webkit-box-shadow: none;
+	background-image: none;
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+/*   Added image to image folder */
+.dijitDialog .dojoxGridFCBoxRemoveCBoxBtnIcon {
+	background-image: url(../image/sprite_icons.png);
+	background-position: -198px -18px;
+	width: 16px;
+	height: 16px;
+}
+
+
+.dijitDialog .dojoxGridFDPaneAddCBoxBtnIcon {
+	background-image: url(../image/sprite_icons.png);
+	background-position: -218px 2px;
+	width: 16px;
+	height: 16px;
+}
+.dijitDialog .dojoxGridFStatusTipDelRuleBtnIcon {
+	background-image: url(../image/sprite_icons.png);
+	background-position: -198px -18px;
+	height: 16px;
+	width: 16px;
+}
+
+.dijitDialog .dojoxGridDialogButton {
+	width: 20px!important;
+	text-align: right;
+}
+.dijitDialog .dojoxGridPaginator {
+	border-top:1px #DBDBDB solid;
+	text-align:center;
+	width: 98%;
+	height: 24px;
+	table-layout : fixed;
+	background-color: #EAEAEA;
+}
+
+
+/*  taken from claro css added a folder images for png files */
+
+.dijitDialog .dojoxGridMasterHeader .dojoxGridRowTable {
+	border-left: 1px solid #BCBCBC;
+	border-right: 1px solid white;
+	background-color: transparent;
+}
+.dijitDialog .dojoxGridHeader tr:first-child .dojoxGridCell {
+	border-top: 1px solid transparent;
+}
+.dijitDialog .dojoxGridHeader:first-child .dojoxGridRowTable {
+	border-left-width: 0;
+}
+/* url(../image/sprite_icons.png); */
+.dijitDialog .dojoxGridMasterHeader {
+	background:url(../image/header.png);
+	background: -moz-linear-gradient(top, #EDF2F7, #D0DFEA);
+	background: -webkit-gradient(linear, left top, left bottom, from(#EDF2F7), to(#D0DFEA));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFEDF2F7, endColorstr=#FFD0DFEA);
+	border-bottom: 1px solid white;
+	border-left: 1px solid white;
+	border-top: 1px solid white;
+}
+.dijitDialog .dojoxGridCell {
+	padding: 3px 5px;
+	border-color: transparent #E5DAC8 #E5DAC8 transparent;
+}
+.dj_ie6 .dijitDialog .dojoxGridCell{
+	border-color:#F5F5F5;
+}
+.dijitDialog .dojoxGridHeader {
+	background: transparent;
+	margin-left: -2px;
+}
+.dijitDialog .dojoxGridHeader:first-child {
+	margin-left: -1px;
+}
+.dijitDialog .dojoxGridHeader .dojoxGridCell{
+	padding: 2px 5px;
+	background: transparent;
+	border-bottom: 1px solid #BCBCBC;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 1px solid #BCBCBC;
+	vertical-align: top;
+}
+.dijitDialog .dojoxGridHeader .dojoxGridCellOver {
+	background:#9dcfff;
+}
+.dijitDialog .dojoxGridSortNode{
+	white-space: normal;
+	background: none;
+	border: none;
+	padding: 0;
+}
+.dijitDialog .dojoxGridHeader .dojoxGridRowTable tr {
+	background:none;
+}
+.dijitDialog .dojoxGridCellContent {
+	padding:4px 6px 4px 6px;
+}
+.dijitDialog  .dj_webkit .dijitDialog th.dojoxGridCell > .dojoxGridCellContent {
+	padding: 4px 0;
+}
+.dijitDialog .dojoxGridRowbarInner {
+	width:20px;
+}
+.dijitDialog .dojoxGridHeaderSelected .dojoxGridHeaderActive {
+	background-color:#91c9fe;
+}
+  
+ 
+.dj_ie6 .dijitDialog .dojoxGridRowOver .dojoxGridCell {
+	border-color: #ABD6FF;
+}
+.dj_ie6 .dijitDialog .dojoxGridRowActive .dojoxGridCell {
+	border-color: #7DBEFA;
+}
+.dijitDialog .dojoxGridCell,
+.dijitDialog .dojoxGridCellFocus {
+	outline: none;
+}
+.dijitDialog .dojoxGridPaginator{
+	background: url(../image/header_shadow.png) ;
+	
+}
+
+
+/*   Button */
+
+
+
+.dijitDialog .dijitButtonNode {
+  
+  -webkit-transition-property: background-color;
+  -moz-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+.dijitDialog .dijitButton .dijitButtonNode,
+.dijitDialog .dijitDropDownButton .dijitButtonNode,
+.dijitDialog .dijitComboButton .dijitButtonNode,
+.dijitDialog .dijitToggleButton .dijitButtonNode {
+  
+  border: 1px solid #769dc0;
+  padding: 2px 4px 4px 4px;
+  background-image: url("images/button.png");
+  background-position: center top;
+  background-repeat: repeat-x;
+  background-color: #e9f4fe;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+.dijitDialog .dijitComboButton .dijitArrowButton {
+  border-left-width: 0;
+  padding: 4px 2px 4px 2px;
+  
+}
+.dijitDialog .dijitArrowButtonInner {
+  width: 15px;
+  height: 15px;
+  margin: 0 auto;
+  background-image: url("images/buttonArrows.png");
+  background-repeat: no-repeat;
+  background-position: -51px 53%;
+}
+.dijitDialog .dijitLeftArrowButton .dijitArrowButtonInner {
+  background-position: -77px 53%;
+}
+.dijitDialog .dijitRightArrowButton .dijitArrowButtonInner {
+  background-position: -26px 53%;
+}
+.dijitDialog .dijitUpArrowButton .dijitArrowButtonInner {
+  background-position: 0 53%;
+}
+.dijitDialog .dijitDisabled .dijitArrowButtonInner {
+  background-position: -151px 53%;
+}
+.dijitDialog .dijitDisabled .dijitLeftArrowButton .dijitArrowButtonInner {
+  background-position: -177px 53%;
+}
+.dijitDialog .dijitDisabled .dijitRightArrowButton .dijitArrowButtonInner {
+  background-position: -126px 53%;
+}
+.dijitDialog .dijitDisabled .dijitUpArrowButton .dijitArrowButtonInner {
+  background-position: -100px 53%;
+}
+.dijitDialog .dijitButtonText {
+  padding: 0 0.3em;
+  text-align: center;
+}
+.dijitDialog .dijitButtonHover .dijitButtonNode,
+.dijitDialog .dijitDropDownButtonHover .dijitButtonNode,
+.dijitDialog .dijitComboButton .dijitButtonNodeHover,
+.dijitDialog .dijitComboButton .dijitDownArrowButtonHover,
+.dijitDialog .dijitToggleButtonHover .dijitButtonNode {
+  background-color: #abd6ff;
+  color: #000000;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.dijitDialog .dijitButtonActive .dijitButtonNode,
+.dijitDialog .dijitDropDownButtonActive .dijitButtonNode,
+.dijitDialog .dijitComboButtonActive .dijitButtonNode,
+.dijitDialog .dijitToggleButtonActive .dijitButtonNode {
+  background-color: #abd6ff;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.dijitDialog .dijitButtonDisabled,
+.dijitDialog .dijitDropDownButtonDisabled,
+.dijitDialog .dijitComboButtonDisabled,
+.dijitDialog .dijitToggleButtonDisabled {
+  background-image: none;
+  outline: none;
+}
+.dijitDialog .dijitButtonDisabled .dijitButtonNode,
+.dijitDialog .dijitDropDownButtonDisabled .dijitButtonNode,
+.dijitDialog .dijitComboButtonDisabled .dijitButtonNode,
+.dijitDialog .dijitToggleButtonDisabled .dijitButtonNode {
+  background-position: 0 -149px;
+  background-color: #efefef;
+  border: solid 1px #d3d3d3;
+  color: #818181;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  -moz-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.dijitDialog .dijitComboButtonDisabled .dijitArrowButton {
+  border-left-width: 0;
+}
+.dijitDialog table.dijitComboButton {
+  border-collapse: separate;
+  
+}
+.dj_ie6 .dijitDialog .dijitButtonNode {
+  background-image: none;
+}
+.dijitDialog .dijitComboButton .dijitStretch {
+  -moz-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
+}
+.dijitDialog .dijitComboButton .dijitArrowButton {
+  -moz-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0;
+}
+/* Claro.css  */
+.dijitReset .dijitArrowButtonInner {
+  background-image: url(../image/commonFormArrows.png);
+  background-position: -35px 53%;
+  background-repeat: no-repeat;
+  margin: 0;
+  width: 16px;
+  border: 1px solid #ffffff;
+}
+/*  Claro Enhanced */
+.dojoxGridFDTitlePane .dijitDialogPaneContent {
+	padding: 7px 5px 9px 5px;
+	height: 290px !important;
+}
+.dojoxGridFDTitlePane .dijitDialog
+{
+ width: 300px;
+ height:400px;
+}
+
+ .dijitDialog {
+  border: 1px solid #769dc0;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+ .dijitDialogPaneContent {
+  background: #ffffff repeat-x top left;
+  border-top: 1px solid #769dc0;
+  padding: 10px 8px;
+  position: relative;
+  width: 400px;
+}
+
+.dijitDialogPaneContentArea {
+  
+  margin: -10px -8px;
+  padding: 10px 8px;
+}
+.dijitDialogPaneActionBar {
+  background-color: #efefef;
+  padding: 3px 5px 2px 7px;
+  text-align: right;
+  border-top: 1px solid #d3d3d3;
+  margin: 10px -8px -10px;
+}
+  .dijitDialogPaneActionBar .dijitButton {
+  float: none;
+}
+ .dijitDialog .dijitDialogTitleBar {
+  border: 1px solid #ffffff;
+  border-top: none;
+   background-image: url(../image/titlebar.png);
+  background-color: #abd6ff; 
+  background-repeat: repeat-x;
+  padding: 5px 7px 4px 7px;
+}
+.dijitDialogTitle {
+  
+  padding: 0 1px;
+  font-size: 1.091em;
+}
+ .dijitDialog .dijitDialogCloseIcon {  
+  background: url(../image/dialogCloseIcon.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 5px;
+  height: 15px;
+  width: 21px;
+}
+/*.dj_ie6 .claro .dijitDialogCloseIcon*/ 
+.dijitDialog .dijitDialogCloseIcon
+{
+  background-image: url(../image/dialogCloseIcon8bit.png);
+}
+.dijitDialog .dijitDialogCloseIconHover {
+  background-position: -21px;
+}
+ .dijitDialog .dijitDialogCloseIconActive {
+  background-position: -42px;
+}
+.dijitDialog .dijitTooltipDialog {
+    background: transparent;
+  }
+/* From Claro  Enhanced Class   */
+ 
+.dijitDialog .dojoxGridFDPaneRelation {
+	margin: 0 0 3px 4px;
+}
+ 
+
+.dijitDialog .dojoxEllipsisContainer{
+	width: 100%; 
+	height : auto;
+	 
+}
+.dijitDialog .dojoxEllipsisShown:after{
+	content: "\2026"
+}
+
+.dojoxEllipsisIFrame{
+	white-space: normal;
+	border: none;
+	width: 100%;
+	display: block;
+	height: 1px;
+	margin-top: -1px;
+	clear: both;
+}
+ 
+ /*  Accordian class */
+ 
+.dijitDialog .dijitAccordionContainer {
+  border: none;
+}
+.dijitDialog .dijitAccordionInnerContainer {
+/*  background-color: #efefef;*/
+ background-color: white;		
+  border: solid 1px #b5bcc7;
+  margin-bottom: 1px;
+  -webkit-transition-property: background-color, border;
+  -moz-transition-property: background-color, border;
+  transition-property: background-color, border;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: linear;
+  -moz-transition-timing-function: linear;
+  transition-timing-function: linear;
+}
+.dijitDialog .dijitAccordionTitle {
+  background-color: transparent;  
+  background-image: url(../image/accordion.png");
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  padding: 5px 7px 2px 7px;
+  min-height: 17px;
+  color: #4a4a4a;
+}
+.dijitDialog .dijitAccordionTitleHover {
+  color: #000000;
+}
+.dj_ie6 .dijitDialog .dijitAccordionTitle {
+  background-image: none;
+}
+.dijitDialog .dijitAccordionContainer .dijitAccordionChildWrapper {
+  
+  background-color: #ffffff;
+  border: 1px solid #769dc0;
+  margin: 0 2px 2px;
+}
+.dijitDialog .dijitAccordionContainer .dijitAccordionContainer-child {
+  
+  padding: 9px;
+}
+.dijitDialog .dijitAccordionInnerContainerActive {
+  border: 1px solid #769dc0;
+  background-color: #7dbefa;
+  -webkit-transition-duration: 0.1s;
+  -moz-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.dijitDialog .dijitAccordionInnerContainerActive .dijitAccordionTitle {
+  background-position: 0 -136px;
+  color: #000000;
+}
+.dijitDialog .dijitAccordionInnerContainerSelected {
+  border-color: #769dc0;
+  background-color: #cfe5fa;
+}
+.dijitDialog .dijitAccordionInnerContainerSelected .dijitAccordionTitle {
+  color: #000000;
+  background-position: 0 0;
+  
+}
+.dijitDialog .dijitAccordionInnerContainerHover dijitAccordionTitle {
+    color: #000000;
+}
+.dijitDialog .dijitAccordionInnerContainerHover, .dijitDialog .dijitAccordionInnerContainerSelectedActive {
+  
+  border: 1px solid #769dc0;
+  background-color: #abd6ff;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.dijitDialog .dijitAccordionInnerContainerSelectedHover .dijitAccordionChildWrapper, .dijitDialog .dijitAccordionInnerContainerSelectedActive .dijitAccordionChildWrapper {
+  background-color: #ffffff;
+  border: 1px solid #769dc0 !important;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
+}
+.dijitDialog .dojoxGridFDPane .dijitAccordionText {
+	display: inline-block;
+	position: relative;
+}
+
+/*   For popup size */
+
+ 

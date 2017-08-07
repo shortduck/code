@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!--Define each of your definitions here-->
+	<definition name="dynamicMainPageTemplate" template="/jsp/dynamicMainPageTemplate.jsp">
+		<put-attribute name="headerarea" value="/jsp/header.jsp"/>
+		<put-attribute name="menuarea" value="/jsp/menu.jsp"/>
+		<put-attribute name="footerarea" value="/jsp/footer.jsp"/>
+	</definition>
+</tiles-definitions>

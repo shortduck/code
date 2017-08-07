@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+Build script for Time and Expense project
+
+Initial Version
+
+ZH - 06/10/2009
+
+Most of the tasks are the same as in the build.xml file except for the following differences:
+
+1) This script should be used to reconstitute builds using a version label. The versionLabel property in the init task should
+be set to the version label to be used
+
+2) New version labels are not created using this build file.  
+
+3) This file also includes task for sundry Serena tasks such as deleting version labels
+
+-->
+	
+<project name="Time And Expense - Build with Version Label" default="build-ear" basedir="C:\TimeAndExpense_Builds\TimeAndExpense">
+	
+	<!-- set global properties for this build -->
+	<property name="src" value="${basedir}/src" />
+	<property name="build" value="${basedir}/WebContent/WEB-INF/classes" />
+	<property name="lib" value="${basedir}/WebContent/WEB-INF/lib" />
+	<property name="dist" value="${basedir}/dist" />
+	<property name="pendingDeployment" value="P:\HRMN-UserWork\Time &amp; Expense Project\T&amp;E Light\07_Implementation\pending deployment" />
+	
+	<property environment="env"/>
+	    <property name="ECLIPSE_HOME" value="../../../../IBM/SDP"/>
+	    <property name="debuglevel" value="source,lines,vars"/>
+	    <property name="target" value="1.5"/>
+	    <property name="source" value="1.5"/>
+	
+   <!-- Define classpath for the project-->	
+   <path id="WebLib.cp">
+	    	<fileset dir="${basedir}/WebContent/WEB-INF/lib">
+	    	        <include name="*.jar"/>
+			</fileset>
+	    </path>
+
+	   	<path id="TimeAndExpense.classpath">
+	   		<pathelement location="${basedir}/WebContent/WEB-INF/classes"/>
+	    	<path refid="WebLib.cp"/>
+	    </path>
+
+	<target name="clean">
+		<!-- Delete the ${build} and ${distribute} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp>
+		</tstamp>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${dist}" />
+		<!-- Define the default version label based upon timestamp-->
+		<property name="versionLabel" value="" />
+	</target>
+	
+	<!-- get code from repository -->
+	<target name="getLatestCode" depends="init">   
+	    <exec executable="pcli">   
+			<arg line=' get "-prS:\HRS\Time and Expense\CM" "-a${basedir}" "-v${versionLabel}" "-o" "-z" "/" '/>
+	</exec>  
+	</target>
+
+	<!-- compile code -->
+	<target name="compile" depends="getLatestCode">
+		<javac srcdir="${src}" destdir="${build}" nowarn="true" source="${source}" target="${target}">
+			<classpath refid="TimeAndExpense.classpath"/>
+		</javac>
+	</target>
+
+	<!-- Perform OpenJPA enhancement-->
+	<target name="JPAEnhance" depends="compile">
+	  <taskdef name="openjpac" classname="org.apache.openjpa.ant.PCEnhancerTask">
+	  	<classpath refid="TimeAndExpense.classpath"/>
+		</taskdef>
+
+	  <openjpac>
+		<config propertiesFile="${basedir}/src/META-INF/persistence.xml"/>
+	  	<classpath refid="TimeAndExpense.classpath"/>
+	  	 <fileset dir="${basedir}/src">
+	  	 			<include name="**/model/db/*.java" />
+	  	 			<include name="**/model/core/*.java" />
+	  		    </fileset>
+	  </openjpac>
+	</target>	
+	
+	<!-- Build application WAR file -->
+	<target name="build-war" depends="JPAEnhance">
+	    	<war destfile="${dist}/TimeAndExpense.war" webxml="${basedir}/WebContent/WEB-INF/web.xml"> 
+	    		<fileset dir="${basedir}/WebContent" />
+
+	    		<fileset dir="${basedir}/src" casesensitive="yes">
+	    			   <include name="**/*.xml"/>
+	    		</fileset>
+	        </war> 
+	    </target>  
+	
+	<!-- Build application EAR file -->
+	 <target name="build-ear" depends="build-war">  
+		 <echo message="Building EAR File"/>  
+	 	                
+		 <ear destfile="${dist}/TimeAndExpense-${versionLabel}.ear" appxml="${basedir}/application.xml">  
+		 <fileset dir="${dist}" includes="*.war"/>    
+		 </ear>
+	 	<delete file="${dist}/TimeAndExpense.war"></delete>
+			 <copy todir="${pendingDeployment}">
+				    	    <fileset dir="${dist}">
+				    	    </fileset>
+			</copy>
+	 </target>  
+	
+	<!-- Delete exising version labels that are no longer needed -->
+	<target name="deleteVersionLabel" depends="">   
+	    <exec executable="pcli">   
+			<arg line=' DeleteLabel "-prS:\HRS\Time and Expense\CM" "-v${versionLabel}" "-z" "/" '/>
+	</exec>  
+	</target>
+
+</project>
